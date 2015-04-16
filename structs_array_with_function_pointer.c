@@ -1,9 +1,19 @@
 #include <stdio.h>
 
+
+//Definition of the callback function
+void myfunction(int n){
+    printf("\nIn function named 'myfunction'.\n\n");
+}
+
+
 struct vr_module {
     char *mod_name;
     int error;
     int error_line;
+    //Variable named "callback" to hold pointer to a function which receives
+    //one integer argument. 
+    void (*callback)(int num);
 };
 
 //Create an array named "modules" of stucture "vr_module" objects.
@@ -15,10 +25,14 @@ static struct vr_module modules[] = {
     },
     {
         .mod_name       =       "Interface",
-        .error           =       2,
+        .error          =       2,
+        .callback       =       myfunction,
     }
 };
 
+
+
+//main starts//
 void main()
 {
 
@@ -32,7 +46,15 @@ printf("\nLength of modules array: %d\n", modules_len);
 //named "vr_module"
 int i;
 for (i = 0; i < modules_len; i++){
-    printf("\n%s\n\n", modules[i].mod_name);
+    if(modules[i].callback){
+        //Invoke the function stored in the attribute "callback" of struct
+        //object
+        modules[i].callback(i);
+    }
 }
 
 }
+//main Ends//
+
+
+
