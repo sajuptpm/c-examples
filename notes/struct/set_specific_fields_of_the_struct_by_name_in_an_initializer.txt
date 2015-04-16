@@ -1,0 +1,26 @@
+
+//So for the following struct:
+//Example:
+//https://github.com/Juniper/contrail-vrouter/blob/master/include/vrouter.h#L58
+struct demo_s {
+  int     first;
+  int     second;
+  int     third;
+};
+
+//you can use
+struct demo_s demo = { 1, 2, 3 };
+
+//or:
+
+//Example:
+//https://github.com/Juniper/contrail-vrouter/blob/master/linux/vrouter_mod.c#L2346
+struct demo_s demo = { .first = 1, .second = 2, .third = 3 };
+
+//or even:
+
+struct demo_s demo = { .first = 1, .third = 3, .second = 2 };
+
+//though the last two are for C99 only.
+
+
